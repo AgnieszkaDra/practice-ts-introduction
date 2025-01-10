@@ -1,44 +1,41 @@
 let marks: number[] = []; 
 
 function addMark(mark: number): void{
-    if(mark > 10){
+    if(mark > 6){
         return
     }
     marks.push(mark); 
 }
 
-addMark(12);
-addMark(9);
 addMark(6);
-addMark(6);
+addMark(2);
+addMark(2);
+addMark(4);
 
-function getAverage(): number {
-    if (marks.length === 0) {
+function getAverage(array: number[]): number {
+    if (array.length === 0) {
       return 0;
     }
-  
-    let sum = 0;
-  
-    for (let i = 0; i <= marks.length; i++) {
-      sum += marks[i];
+    const sum = array.reduce((acc, curr) => acc + curr, 0);
+    return sum / array.length;
+  }
+
+function getMarkFrequency(array: number[]): number[] {
+
+  const maxMark = Math.max(...array); 
+  let frequencyArray: number[] = []
+  frequencyArray.length = maxMark + 1;
+  frequencyArray.fill(0)
+
+  array.forEach(element => {
+    if (element <= maxMark) {
+      frequencyArray[element]++; 
     }
+  });
   
-    return sum / marks.length; 
-  }
+  return frequencyArray;
 
-  function getMarkFrequency(marks: number[]): number[] {
-    const maxMark = Math.max(...marks); 
-    let frequencyArray: number[] = []
-    frequencyArray.length = maxMark + 1;
-    frequencyArray.fill(0)
-
-    marks.forEach(mark => {
-      if (mark <= maxMark) {
-        frequencyArray[mark]++; 
-      }
-    });
-  
-    return frequencyArray;
-  }
+}
   
 console.log(getMarkFrequency(marks)); 
+console.log(getAverage(marks));
